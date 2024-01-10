@@ -1,0 +1,146 @@
+// src/SecondPage.jsx
+import React from "react";
+import { Link } from "react-router-dom";
+import './accountsandContacts.css';
+
+
+const AccountsandContacts = () => {
+  // create an array of contacts
+  const contacts = [
+    {
+      id: 1,
+      name: "Maurice Lawson",
+      email: "donte.zoomie@gmail.com",
+      account: "67890",
+      location: "Town",
+      orders: 15,
+      phone: "987-654-3210",
+    },
+    {
+      id: 2,
+      name: "Ashlee York",
+      email: "jane@example.com",
+      account: "67890",
+      location: "Town",
+      orders: 15,
+      phone: "987-654-3210",
+    },
+    {
+      id: 3,
+      name: "Simu Liu",
+      email: "john@example.com",
+      account: "12332",
+      location: "City",
+      orders: 10,
+      phone: "123-456-7890",
+    },
+  ];
+
+  const makeCall = (phone:string) => {
+    
+  
+    const iframe = window.frames['zoom-embeddable-phone-iframe']
+  
+    if (iframe) {
+      if (iframe.contentWindow) {
+        // If the iframe has already loaded, send the message
+        console.log("iframe.contentWindow is available");
+        iframe.contentWindow.postMessage(
+          {
+            type: "onclicktoact",
+            data: {phone:"+9174994441"},
+          },
+          "*"
+        );
+
+        console.log("Sending Message data=" + phone);
+
+
+      } else {
+        // If the iframe has not yet loaded, wait for the load event
+        iframe.addEventListener("load", function () {
+          iframe.contentWindow.postMessage(
+            {
+              type: "onclicktoact",
+              data: { phone:"9174994441" },
+            },
+            "*"
+          );
+        });
+      }
+    } else {
+      console.error("Iframe is not available");
+    }
+  };
+  
+
+
+
+
+
+  return (
+    <div className="container-fluid">
+      <h3 className="text-dark mb-4">Accounts</h3>
+
+      <div className="card shadow">
+
+        <div className="card-header py-3">
+          <p className="text-primary m-0 fw-bold">Active Account Info</p>
+        </div>
+        <div className="card-body">
+          <div
+            className="table-responsive table mt-2"
+            role="grid"
+            aria-describedby="dataTable_info"
+          >
+            <table className="table my-0" id="accountsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Account</th>
+                  <th>Location</th>
+                  <th>Orders</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                {contacts.map((contact) => (
+                  <tr key={contact.id}>
+                    <td style={{ fontFamily: "Lato, sans-serif" }}>
+                      <img
+                        className="rounded-circle me-2"
+                        width="30"
+                        height="30"
+                        src={`src/assets/img/${contact.name}.png`}
+                        alt=""
+                      />
+
+                      <Link to={`/contact-details/${contact.id}`}>
+                        {contact.name}
+                      </Link>
+                    </td>
+                    <td>{contact.email}</td>
+                    <td>{contact.account}</td>
+                    <td>{contact.location}</td>
+                    <td>{contact.orders}</td>
+                    <td>
+                      <a onClick={() => makeCall(contact.phone)} href="#">
+                        {contact.phone}
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr></tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AccountsandContacts;
