@@ -3,13 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AccountsandContacts from './components/accountsandContacts';
 import ContactDetails from './components/contactDetails';
 import CallLogs from './components/callLogs';
-import Instructions from './components/Instructions';
 import ZCCSmartEmbedDebug from './components/zccSmartEmbedDebug';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/NavBar';
 import './styles/main.css'; // Import global styles
 import VerticalSidebar from './components/VerticalSidebar';
-import SalesDashboard from './components/SalesDashboard'; // Import SalesDashboard (replace with your actual import)
+
 
 const App = () => {
   const [expanded, setExpanded] = useState(false);
@@ -32,12 +31,12 @@ const App = () => {
                 {/* Main Section */}
                 <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                   <Routes>
-                    <Route path="/" element={<SalesDashboard />} />
-                    <Route path="/sales-dashboard" element={<SalesDashboard />} />
+                    <Route path="/" element={<AccountsandContacts />} />
+                 
                     <Route path="/accounts" element={<AccountsandContacts />} />
                     <Route path="/contact-details/:id" element={<ContactDetails />} />
                     <Route path="/call-log" element={<CallLogs />} />
-                    <Route path="/instructions" element={<Instructions />} />
+                    
                     <Route path="/seven" element={<ZCCSmartEmbedDebug />} />
                   </Routes>
                 </div>

@@ -14,12 +14,7 @@ const Sidebar = ({  zccSmartInstructions, zccSmartEmbedDebug }) => {
           </div>
 
         <ul className="navbar-nav text-light" id="accordionSidebar">
-        <li className="nav-item" >
-            <Link to="/sales-dashboard" className="nav-link" >
-              <i className="fas fa-tachometer-alt"></i>
-              <span style={{ fontFamily: 'Lato, sans-serif' }}>Sales Dashboard</span>
-            </Link>
-          </li>
+        
           <li className="nav-item" >
             <Link to="/accounts" className="nav-link" >
               <i className="fas fa-table"></i>
@@ -33,12 +28,6 @@ const Sidebar = ({  zccSmartInstructions, zccSmartEmbedDebug }) => {
             </Link>
           </li>
           
-          <li className="nav-item" >
-              <Link to="/instructions" className="nav-link" >
-                <i className="fas fa-log"></i>
-                <span style={{ fontFamily: 'Lato, sans-serif' }}>Instructions</span>
-              </Link>
-            </li>
         
           {zccSmartEmbedDebug && (
             <li className="nav-item" >
