@@ -20,11 +20,14 @@ const App = () => {
   return (
     <Router>
       <div className={`App d-flex ${expanded ? 'expanded' : 'collapsed'}`}>
+
         {/* Left Sidebar */}
         <Sidebar />
 
         <div className="container-fluid flex-grow-1">
+
           <div className="row">
+
             <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 min-vh-100">
               <Navbar />
               <div className="row flex-grow-1">
@@ -40,14 +43,17 @@ const App = () => {
                     <Route path="/seven" element={<ZCCSmartEmbedDebug />} />
                   </Routes>
                 </div>
-
-                {/* Right Sidebar */}
-                <div className={`col-md-3 col-lg-2 ${expanded ? 'expanded' : 'collapsed'}`}>
-                  <VerticalSidebar expanded={expanded} toggleSidebar={toggleSidebar} />
-                </div>
               </div>
             </main>
+
+            {/* Right Sidebar */}
+
+          <div className={`col-md-3 col-lg-2 ${expanded ? 'expanded' : 'collapsed'}`}>
+          <VerticalSidebar expanded={expanded} toggleSidebar={toggleSidebar} />
           </div>
+
+        </div>
+
         </div>
       </div>
     </Router>
