@@ -1,32 +1,48 @@
-import React, { useState } from 'react';
-import './callLogs.css';
-const CallLogs = ({ makeCall, clearCallLogs }) => {
+import React, { useState } from "react";
+import "./callLogs.css";
+import { recentCalls } from "../fakeData"; // Import the sample data
 
-    // create recentCalls array
-     const recentCalls = [
-    {
-      engagementId: 1,
-      callType: 'inbound',
-      queue: 'Sales',
-      fromNumber: '123-456-7890',
-      toNumber: '987-654-3210',
-      timestamp: '2021-01-01 12:00:00',
-      duration: '00:00:30',
-      dispositionCode: 'ANSWERED',
-      notes: 'This is a note',
-      recordingURL: 'https://www.google.com'
-    },
-]
+const CallLogs = ({ makeCall, clearCallLogs, expanded }) => {
+  const onMakeCall = (phone: string) => {
+    const iframe = window.frames["zoom-embeddable-phone-iframe"];
 
-const getRecordingURL = (engagementId) => {
+    if (iframe) {
+      if (iframe.contentWindow) {
+        // If the iframe has already loaded, send the message
+        console.log("iframe.contentWindow is available");
+        iframe.contentWindow.postMessage(
+          {
+            type: "onclicktoact",
+            data: { phone: phone },
+          },
+          "*"
+        );
+
+        console.log("Sending Message data=" + phone);
+      } else {
+        // If the iframe has not yet loaded, wait for the load event
+        iframe.addEventListener("load", function () {
+          iframe.contentWindow.postMessage(
+            {
+              type: "onclicktoact",
+              data: { phone: "9174994441" },
+            },
+            "*"
+          );
+        });
+      }
+    } else {
+      console.error("Iframe is not available");
+    }
+  };
+
+  const getRecordingURL = (engagementId) => {
     // Implement your getRecordingURL method
-    console.log('Getting recording URL for engagement ID', engagementId);
-  }
-
-
+    console.log("Getting recording URL for engagement ID", engagementId);
+  };
 
   return (
-    <div  className="container-fluid">
+    <div className={` ${expanded ? "col-lg-9" : "container-fluid"}`}>
       <h3 className="text-dark mb-4">Call Logs</h3>
       <button onClick={clearCallLogs}>Clear</button>
       <div className="card-body">
@@ -52,19 +68,19 @@ const getRecordingURL = (engagementId) => {
                   <td>{call.callType}</td>
                   <td>{call.queue}</td>
                   <td>
-                    {call.type === 'chat' ? (
+                    {call.callType === "chat" ? (
                       <p>{call.fromNumber}</p>
                     ) : (
-                      <a onClick={() => makeCall(call.number)} href="#">
+                      <a onClick={() => onMakeCall(call.toNumber)} href="#">
                         {call.fromNumber}
                       </a>
                     )}
                   </td>
                   <td>
-                    {call.type === 'chat' ? (
+                    {call.callType === "chat" ? (
                       <p>{call.toNumber}</p>
                     ) : (
-                      <a onClick={() => makeCall(call.number)} href="#">
+                      <a onClick={() => onMakeCall(call.toNumber)} href="#">
                         {call.toNumber}
                       </a>
                     )}
@@ -75,11 +91,16 @@ const getRecordingURL = (engagementId) => {
                   <td>{call.dispositionCode}</td>
                   <td>{call.notes}</td>
                   <td>
-                    <a href={call.type !== 'chat' ? getRecordingURL(call.engagementId) : undefined}
+                    <a
+                      href={
+                        call.callType !== "chat"
+                          ? getRecordingURL(call.engagementId)
+                          : undefined
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {call.type !== 'chat' ? 'download' : ''}
+                      {call.callType !== "chat" ? "download" : ""}
                     </a>
                   </td>
                 </tr>

@@ -1,50 +1,17 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { sampleContacts } from "../fakeData"; // Import the sample data
 
 const ContactDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  // create an array of contacts
-  const contact =
-    [
-      {
-        id: 1,
-        name: "Maurice Lawson",
-        email: "donte.zoomie@gmail.com",
-        account: "67890",
-        location: "Town",
-        orders: 15,
-        phone: "9174994441",
-      },
-      {
-        id: 2,
-        name: "Ashlee York",
-        email: "jane@example.com",
-        account: "67890",
-        location: "Town",
-        orders: 15,
-        phone: "987-654-3210",
-      },
-      {
-        id: 3,
-        name: "Simu Liu",
-        email: "john@example.com",
-        account: "18945",
-        location: "City",
-        orders: 10,
-        phone: "123-456-7890",
-      },
-    ].find((c) => c.id.toString() === id) || {};
-
-  console.log("contact", contact);
+  const contact = sampleContacts.find((c) => c.id.toString() === id) || {};
 
   // create MakeCall, GetContactLogs, GetRecordingURLs functions
-  const onMakeCall = (phone:string) => {
-    
-  
-    const iframe = window.frames['zoom-embeddable-phone-iframe']
-  
+  const onMakeCall = (phone: string) => {
+    const iframe = window.frames["zoom-embeddable-phone-iframe"];
+
     if (iframe) {
       if (iframe.contentWindow) {
         // If the iframe has already loaded, send the message
@@ -52,21 +19,19 @@ const ContactDetails = () => {
         iframe.contentWindow.postMessage(
           {
             type: "onclicktoact",
-            data: {phone:phone},
+            data: { phone: phone },
           },
           "*"
         );
 
         console.log("Sending Message data=" + phone);
-
-
       } else {
         // If the iframe has not yet loaded, wait for the load event
         iframe.addEventListener("load", function () {
           iframe.contentWindow.postMessage(
             {
               type: "onclicktoact",
-              data: { phone:"9174994441" },
+              data: { phone: "9174994441" },
             },
             "*"
           );
@@ -76,8 +41,6 @@ const ContactDetails = () => {
       console.error("Iframe is not available");
     }
   };
-  
-
 
   const onGetContactLogs = (contactId) => {
     // Implement your getContactLogs method
@@ -212,7 +175,8 @@ const ContactDetails = () => {
                         href={
                           call.type !== "chat"
                             ? onGetRecordingURLs(call.engagementId)
-                            : undefined}
+                            : undefined
+                        }
                         target="_blank"
                         rel="noopener noreferrer"
                       >

@@ -1,46 +1,16 @@
 // src/SecondPage.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import './accountsandContacts.css';
-
+import "./accountsandContacts.css";
+import { sampleContacts } from "../fakeData"; // Import the sample data
 
 const AccountsandContacts = () => {
   // create an array of contacts
-  const contacts = [
-    {
-      id: 1,
-      name: "Maurice Lawson",
-      email: "donte.zoomie@gmail.com",
-      account: "67890",
-      location: "Town",
-      orders: 15,
-      phone: "987-654-3210",
-    },
-    {
-      id: 2,
-      name: "Ashlee York",
-      email: "jane@example.com",
-      account: "67890",
-      location: "Town",
-      orders: 15,
-      phone: "987-654-3210",
-    },
-    {
-      id: 3,
-      name: "Simu Liu",
-      email: "john@example.com",
-      account: "12332",
-      location: "City",
-      orders: 10,
-      phone: "123-456-7890",
-    },
-  ];
+  const contacts = sampleContacts;
 
-  const makeCall = (phone:string) => {
-    
-  
-    const iframe = window.frames['zoom-embeddable-phone-iframe']
-  
+  const makeCall = (phone: string) => {
+    const iframe = window.frames["zoom-embeddable-phone-iframe"];
+
     if (iframe) {
       if (iframe.contentWindow) {
         // If the iframe has already loaded, send the message
@@ -48,21 +18,19 @@ const AccountsandContacts = () => {
         iframe.contentWindow.postMessage(
           {
             type: "onclicktoact",
-            data: {phone:"+9174994441"},
+            data: { phone: "+9174994441" },
           },
           "*"
         );
 
         console.log("Sending Message data=" + phone);
-
-
       } else {
         // If the iframe has not yet loaded, wait for the load event
         iframe.addEventListener("load", function () {
           iframe.contentWindow.postMessage(
             {
               type: "onclicktoact",
-              data: { phone:"9174994441" },
+              data: { phone: "9174994441" },
             },
             "*"
           );
@@ -72,18 +40,12 @@ const AccountsandContacts = () => {
       console.error("Iframe is not available");
     }
   };
-  
-
-
-
-
 
   return (
     <div className="container-fluid">
       <h3 className="text-dark mb-4">Accounts</h3>
 
       <div className="card shadow">
-
         <div className="card-header py-3">
           <p className="text-primary m-0 fw-bold">Active Account Info</p>
         </div>
