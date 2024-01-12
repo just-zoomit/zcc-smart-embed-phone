@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { sampleContacts, sampleContactLogs } from "../fakeData"; // Import the sample data
+import { sampleContacts, sampleContactLogs } from "../../fakeData"; // Import the sample data
 
 
 const ContactDetails = () => {
@@ -15,7 +15,7 @@ const ContactDetails = () => {
 
     if (iframe) {
       if (iframe.contentWindow) {
-        // If the iframe has already loaded, send the message
+      
         console.log("iframe.contentWindow is available");
         iframe.contentWindow.postMessage(
           {

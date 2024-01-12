@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import AccountsandContacts from "./accountsandContacts";
 import ContactDetails from "./contactDetails";
 import CallLogs from "./callLogs";
-import ZCCSmartEmbedDebug from "./zccSmartEmbedDebug";
-import Navbar from "./NavBar";
+import ZCCSmartEmbedDebug from "../zccSmartEmbedDebug";
+import Navbar from "../NavBar/NavBar";
 
 const MainSection = ({ expanded }) => {
   return (

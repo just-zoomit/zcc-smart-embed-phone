@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./callLogs.css";
-import { recentCalls } from "../fakeData"; // Import the sample data
+import { recentCalls } from "../../fakeData"; // Import the sample data
 
-const CallLogs = ({clearCallLogs, expanded }) => {
-
+const CallLogs = ({ clearCallLogs, expanded }) => {
   const onMakeCall = (phone) => {
     const iframe = window.frames["zoom-embeddable-phone-iframe"];
 
@@ -92,17 +91,18 @@ const CallLogs = ({clearCallLogs, expanded }) => {
                   <td>{call.dispositionCode}</td>
                   <td>{call.notes}</td>
                   <td>
-                    <a
-                      href={
-                        call.callType !== "chat"
-                          ? getRecordingURL(call.engagementId)
-                          : undefined
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {call.callType !== "chat" ? "download" : ""}
-                    </a>
+                    {call.recordingURL ? (
+                      <a
+                        onClick={() => getRecordingURL(call.engagementId)}
+                        href="#"
+                      >
+                        {call.callType !== "chat"
+                          ? call.recordingURL
+                          : "download"}
+                      </a>
+                    ) : (
+                      ""
+                    )}
                   </td>
                 </tr>
               ))}

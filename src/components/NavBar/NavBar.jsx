@@ -1,4 +1,3 @@
-import React from 'react';
 import './NavBar.css'
 
 const Navbar = () => {
@@ -10,8 +9,6 @@ const Navbar = () => {
   };
 
   const numberToCall = "123-456-7890";
-
-
 
   return (
     <nav className="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">

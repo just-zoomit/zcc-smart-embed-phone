@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/Sidebar/Sidebar";
 import "./styles/main.css"; // Import global styles
-import MainSection from "./components/MainSection";
-import VerticalSidebar from "./components/VerticalSidebar";
+import MainSection from "./components/MainSection/MainSection";
+import VerticalSidebar from "./components/SideDrawer/VerticalSidebar";
 
 const App = () => {
   const [expanded, setExpanded] = useState(false);

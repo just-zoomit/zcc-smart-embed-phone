@@ -1,8 +1,6 @@
-// src/SecondPage.jsx
-
 import { Link } from "react-router-dom";
 import "./accountsandContacts.css";
-import { sampleContacts } from "../fakeData"; // Import the sample data
+import { sampleContacts } from "../../fakeData"; // Import the sample data
 
 const AccountsandContacts = () => {
   // create an array of contacts

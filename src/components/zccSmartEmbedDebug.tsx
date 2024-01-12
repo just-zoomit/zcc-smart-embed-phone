@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 
-const ZCCSmartEmbedDebug = ({ zccSmartEmbedLogs, clearZCCSmartEmbedLogs }) => {
+const ZCCSmartEmbedDebug = ({ zccSmartEmbedLogs }) => {
   const [pageView, setPageView] = useState('zccSmartEmbedDebug');
+
+  const clearZCCSmartEmbedLogs = () => {
+    console.log('clearZCCSmartEmbedLogs');
+  }
 
   return (
     <div style={{ display: pageView === 'zccSmartEmbedDebug' ? 'block' : 'none' }} className="container-fluid">
