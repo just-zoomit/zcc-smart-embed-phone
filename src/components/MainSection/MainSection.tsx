@@ -17,10 +17,7 @@ const MainSection = ({ expanded }) => {
               <Route path="/" element={<AccountsandContacts />} />
               <Route path="/accounts" element={<AccountsandContacts />} />
               <Route path="/contact-details/:id" element={<ContactDetails />} />
-              <Route
-                path="/call-log"
-                element={<CallLogs expanded={expanded} />}
-              />
+              <Route path="/call-log" element={<CallLogs expanded={expanded} />} />
               <Route path="/seven" element={<ZCCSmartEmbedDebug />} />
             </Routes>
           </div>

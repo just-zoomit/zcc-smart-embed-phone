@@ -24,7 +24,7 @@ const Navbar = () => {
               className="bg-light form-control border-0 small"
               type="text"
               id="phoneNumber"
-              value={numberToCall} 
+              defaultValue={numberToCall} 
               name="phoneNumber"
               inputMode="tel"
             />
@@ -35,7 +35,7 @@ const Navbar = () => {
         </form>
 
         <ul className="navbar-nav flex-nowrap ms-auto">
-          {/* ... Your existing code for dropdowns ... */}
+         
 
           <li className="nav-item dropdown no-arrow">
             <div className="nav-item dropdown no-arrow">
@@ -66,7 +66,7 @@ const Navbar = () => {
             </div>
           </li>
         </ul>
-        {/* ... */}
+      
       </div>
     </nav>
   );
