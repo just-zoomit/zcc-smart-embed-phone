@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { sampleContacts } from "../fakeData"; // Import the sample data
+import { sampleContacts, sampleContactLogs } from "../fakeData"; // Import the sample data
+
 
 const ContactDetails = () => {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ const ContactDetails = () => {
   const contact = sampleContacts.find((c) => c.id.toString() === id) || {};
 
   // create MakeCall, GetContactLogs, GetRecordingURLs functions
-  const onMakeCall = (phone: string) => {
+  const onMakeCall = (phone) => {
     const iframe = window.frames["zoom-embeddable-phone-iframe"];
 
     if (iframe) {
@@ -45,38 +46,7 @@ const ContactDetails = () => {
   const onGetContactLogs = (contactId) => {
     // Implement your getContactLogs method
     console.log("Getting contact logs for", contactId);
-    return [
-      {
-        callType: "inbound",
-        queue: "Sales",
-        timestamp: "2021-08-20 12:00:00",
-        duration: "00:01:00",
-        engagementId: "168545",
-        dispositionCode: "Closed",
-        notes: "This is a note",
-        type: "voice",
-      },
-      {
-        callType: "inbound",
-        queue: "Sales",
-        timestamp: "2021-08-20 12:00:00",
-        duration: "00:01:00",
-        engagementId: "165845",
-        dispositionCode: "Closed",
-        notes: "This is a note",
-        type: "voice",
-      },
-      {
-        callType: "inbound",
-        queue: "Sales",
-        timestamp: "2021-08-20 12:00:00",
-        duration: "00:01:00",
-        engagementId: "189745",
-        dispositionCode: "Closed",
-        notes: "This is a note",
-        type: "voice",
-      },
-    ];
+    return sampleContactLogs;
   };
 
   const onGetRecordingURLs = (engagementId) => {

@@ -1,5 +1,5 @@
 // src/SecondPage.jsx
-import React from "react";
+
 import { Link } from "react-router-dom";
 import "./accountsandContacts.css";
 import { sampleContacts } from "../fakeData"; // Import the sample data
@@ -8,7 +8,7 @@ const AccountsandContacts = () => {
   // create an array of contacts
   const contacts = sampleContacts;
 
-  const makeCall = (phone: string) => {
+  const makeCall = (phone) => {
     const iframe = window.frames["zoom-embeddable-phone-iframe"];
 
     if (iframe) {
@@ -18,7 +18,7 @@ const AccountsandContacts = () => {
         iframe.contentWindow.postMessage(
           {
             type: "onclicktoact",
-            data: { phone: "+9174994441" },
+            data: { phone: phone },
           },
           "*"
         );
@@ -30,7 +30,7 @@ const AccountsandContacts = () => {
           iframe.contentWindow.postMessage(
             {
               type: "onclicktoact",
-              data: { phone: "9174994441" },
+              data: { phone: phone },
             },
             "*"
           );

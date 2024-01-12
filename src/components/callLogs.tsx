@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./callLogs.css";
 import { recentCalls } from "../fakeData"; // Import the sample data
 
-const CallLogs = ({ makeCall, clearCallLogs, expanded }) => {
-  const onMakeCall = (phone: string) => {
+const CallLogs = ({clearCallLogs, expanded }) => {
+
+  const onMakeCall = (phone) => {
     const iframe = window.frames["zoom-embeddable-phone-iframe"];
 
     if (iframe) {
@@ -25,7 +26,7 @@ const CallLogs = ({ makeCall, clearCallLogs, expanded }) => {
           iframe.contentWindow.postMessage(
             {
               type: "onclicktoact",
-              data: { phone: "9174994441" },
+              data: { phone: phone },
             },
             "*"
           );

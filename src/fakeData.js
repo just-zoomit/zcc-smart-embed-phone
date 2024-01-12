@@ -1,3 +1,4 @@
+// @see  src/components/callLogs
 const recentCalls = [
   {
     engagementId: 1,
@@ -11,12 +12,9 @@ const recentCalls = [
     notes: "This is a note",
     recordingURL: "https://www.google.com",
   },
-  // Add more sample call data as needed
 ];
 
-const id = null;
-// create an array of contacts
-
+// @see src/components/accountsandContacts
 const sampleContacts = [
   {
     id: 1,
@@ -47,4 +45,38 @@ const sampleContacts = [
   },
 ];
 
-export { recentCalls, sampleContacts };
+// @see src/components/contactDetails
+const sampleContactLogs = [
+  {
+    callType: "inbound",
+    queue: "Sales",
+    timestamp: "2021-08-20 12:00:00",
+    duration: "00:01:00",
+    engagementId: "168545",
+    dispositionCode: "Closed",
+    notes: "This is a note",
+    type: "voice",
+  },
+  {
+    callType: "inbound",
+    queue: "Sales",
+    timestamp: "2021-08-20 12:00:00",
+    duration: "00:01:00",
+    engagementId: "165845",
+    dispositionCode: "Closed",
+    notes: "This is a note",
+    type: "voice",
+  },
+  {
+    callType: "inbound",
+    queue: "Sales",
+    timestamp: "2021-08-20 12:00:00",
+    duration: "00:01:00",
+    engagementId: "189745",
+    dispositionCode: "Closed",
+    notes: "This is a note",
+    type: "voice",
+  },
+];
+
+export { recentCalls, sampleContacts, sampleContactLogs };
