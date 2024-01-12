@@ -1,60 +1,34 @@
-import  { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AccountsandContacts from './components/accountsandContacts';
-import ContactDetails from './components/contactDetails';
-import CallLogs from './components/callLogs';
-import ZCCSmartEmbedDebug from './components/zccSmartEmbedDebug';
+import React, { useState } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import Navbar from './components/NavBar';
 import './styles/main.css'; // Import global styles
+import MainSection from './components/MainSection';
 import VerticalSidebar from './components/VerticalSidebar';
 
-
 const App = () => {
+
   const [expanded, setExpanded] = useState(false);
 
   const toggleSidebar = () => {
     setExpanded(!expanded);
   };
 
+
+  
   return (
     <Router>
-      <div className={`App d-flex ${expanded ? 'expanded' : 'collapsed'}`}>
-
-        {/* Left Sidebar */}
+      <div className={`App d-flex `}>
+     
         <Sidebar />
 
-        <div className="container-fluid flex-grow-1">
+     
+        <MainSection  expanded={expanded} />
+        
 
-          <div className="row">
-
-            <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 min-vh-100">
-              <Navbar />
-              <div className="row flex-grow-1">
-                {/* Main Section */}
-                <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                  <Routes>
-                    <Route path="/" element={<AccountsandContacts />} />
-                 
-                    <Route path="/accounts" element={<AccountsandContacts />} />
-                    <Route path="/contact-details/:id" element={<ContactDetails />} />
-                    <Route path="/call-log" element={<CallLogs />} />
-                    
-                    <Route path="/seven" element={<ZCCSmartEmbedDebug />} />
-                  </Routes>
-                </div>
-              </div>
-            </main>
-
-            {/* Right Sidebar */}
-
-          <div className={`col-md-3 col-lg-2 ${expanded ? 'expanded' : 'collapsed'}`}>
+         <div className={` col-lg-2 ${expanded ? 'expanded' : 'collapsed'}`}>
           <VerticalSidebar expanded={expanded} toggleSidebar={toggleSidebar} />
-          </div>
-
         </div>
 
-        </div>
       </div>
     </Router>
   );

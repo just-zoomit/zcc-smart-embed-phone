@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './VerticalSidebar.css'; // Import the corresponding CSS file
 import SmartEmbed from './smartembed';
 
-const VerticalSidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsExpanded(!isExpanded);
-  };
-
+const VerticalSidebar = ({ expanded, toggleSidebar }) => {
   return (
-    <div className={`vertical-sidebar ${isExpanded ? 'expanded' : ''}`}>
+    <div className={`vertical-sidebar ${expanded ? 'expanded' : ''}`}>
       <div className="toggle-button" onClick={toggleSidebar}>
         ☰ 
       </div>
-      {isExpanded && <SmartEmbed />}
+      {expanded && <SmartEmbed />}
     </div>
   );
 };

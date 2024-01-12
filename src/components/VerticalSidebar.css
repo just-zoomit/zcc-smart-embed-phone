@@ -1,6 +1,5 @@
 .vertical-sidebar {
   position: fixed;
-  padding-left: 10px;
   padding-right: 10px;
   top: 0;
   right: -400px; /* Initial position, hides the sidebar */
