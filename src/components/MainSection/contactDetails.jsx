@@ -32,7 +32,7 @@ const ContactDetails = () => {
           iframe.contentWindow.postMessage(
             {
               type: "onclicktoact",
-              data: { phone: "9174994441" },
+              data: { phone: phone },
             },
             "*"
           );
@@ -46,6 +46,7 @@ const ContactDetails = () => {
   const onGetContactLogs = (contactId) => {
     // Implement your getContactLogs method
     console.log("Getting contact logs for", contactId);
+    
     return sampleContactLogs;
   };
 

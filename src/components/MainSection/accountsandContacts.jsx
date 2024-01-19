@@ -97,7 +97,7 @@ const AccountsandContacts = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.map((contact) => (
+                {contacts.map((contact) => (
                   <tr key={contact.id}>
                     <td style={{ fontFamily: "Lato, sans-serif" }}>
                       <img
