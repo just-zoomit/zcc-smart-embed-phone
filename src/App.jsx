@@ -19,7 +19,7 @@ const App = () => {
 
         <MainSection expanded={expanded} />
 
-        <div className={` col-lg-2 ${expanded ? "expanded" : "collapsed"}`}>
+        <div className={` container-fluid ${expanded ? "expanded" : "collapsed"}`}>
           <VerticalSidebar expanded={expanded} toggleSidebar={toggleSidebar} />
         </div>
       </div>
