@@ -1,26 +1,15 @@
-import{ useState } from 'react';
+import { useState} from 'react';
 import { Link } from "react-router-dom";
 import "./accountsandContacts.css";
 import { sampleContacts } from "../../fakeData"; // Import the sample data
 import { v4 as uuidv4 } from 'uuid'; // Import the uuid library
+import ContactForm from './ContactForm'; // Import the ContactForm component
 
 import { setItem, getItem} from '../storageUtil';
 
 const AccountsandContacts = () => {
-  const [data, setData] = useState(getItem('userData') || []); // Initialize with stored data
-  const [showForm, setShowForm] = useState(false); // State to control form visibility
-  
-  const [newContact, setNewContact] = useState({
-    id: uuidv4(),
-    name: '',
-    email: '',
-    account: '',
-    location: '',
-    orders: '',
-    phone: '',
-  });
-
-  
+  const [data, setData] = useState(getItem('userData') || []);
+  const [showForm, setShowForm] = useState(false);
 
 
   // create an array of contacts
@@ -59,40 +48,18 @@ const AccountsandContacts = () => {
     }
   };
 
-  const handleSaveData = () => {
+  const handleSaveData = (contact) => {
     const newId = uuidv4();
-    const updatedContact = { ...newContact, id: newId};
+    const updatedContact = { id: newId, ...contact };
 
-    // Update the data state with the new contact
     const updatedData = [...data, updatedContact];
-    console.log("Set Data: ",updatedData);
     setItem('userData', updatedData);
 
     setData(updatedData);
-
-    // Reset the newContact state
-    setNewContact({
-      id: newId,
-      name: '',
-      email: '',
-      account: '',
-      location: '',
-      orders: '',
-      phone: '',
-    });
-
-      // Hide the form after saving
-      setShowForm(false);
+    setShowForm(false);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    // Update the newContact state when input fields change
-    setNewContact({
-      ...newContact,
-      [name]: value,
-    });
-  };
+
 
   return (
     <div className="container-fluid">
@@ -105,60 +72,7 @@ const AccountsandContacts = () => {
 
     
         {/* Contact form */}
-        {showForm && (
-        <div className="contact-form">
-
-
-        <form>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={newContact.name}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="email"
-            placeholder="Email"
-            value={newContact.email}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="account"
-            placeholder="Account"
-            value={newContact.account}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={newContact.location}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="orders"
-            placeholder="Orders"
-            value={newContact.orders}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone"
-            value={newContact.phone}
-            onChange={handleInputChange}
-          />
-          <button type="button" onClick={handleSaveData}>
-            Save Contact
-          </button>
-        </form>
-
-
-      </div>)}
+        {showForm && <ContactForm onSaveContact={handleSaveData} />}
 
       <div className="card shadow">
         <div className="card-header py-3">
@@ -183,7 +97,7 @@ const AccountsandContacts = () => {
                 </tr>
               </thead>
               <tbody>
-                {contacts.map((contact) => (
+                {data.map((contact) => (
                   <tr key={contact.id}>
                     <td style={{ fontFamily: "Lato, sans-serif" }}>
                       <img
