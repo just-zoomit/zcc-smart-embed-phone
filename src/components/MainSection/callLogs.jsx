@@ -96,7 +96,8 @@ const CallLogs = ({ expanded }) => {
                   <td>{call.engagementId}</td>
                   <td>{call.objectRecord.dispositionCode}</td>
                   <td>{call.objectRecord.notes}</td>
-                  <td> {"TEMP URL"}</td>
+                  <td> <a onClick={() => getRecordingURL(call.engagementId)} href="#" > {"TEMP URL"} </a> </td>
+                  
 
                   <td>
                     {call.objectRecord.callType === "chat" ? (
