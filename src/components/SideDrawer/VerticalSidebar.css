@@ -1,17 +1,19 @@
 .vertical-sidebar {
-  position: fixed;
+
   padding-right: 10px;
   top: 0;
   right: -400px; /* Initial position, hides the sidebar */
   height: 100vh;
-  width: 26.33%; /* Set the width when collapsed */
+  width: auto; /* Set the width when collapsed */
   background-color: #f8f9fa;
   transition: right 0.3s ease-out, width 0.3s ease-out; /* Add transition for width */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #1a1647;
   box-sizing: border-box; /* Ensure consistent box sizing */
 }
 
 .vertical-sidebar.expanded {
+  background-color: #1a1647;
   right: 0; /* Shows the sidebar when expanded */
   width: 36.60%; /* Set the width when expanded */
 }
@@ -19,20 +21,22 @@
 .toggle-button {
   cursor: pointer;
   font-size: 40px;
-  padding: 10px;
+  padding-left: 10px;
   height: 70px;
+  width: auto;
   box-sizing: border-box; /* Ensure consistent box sizing */
-  background-color: #1a1647;
   color: #fff;
   text-align: left;
 }
 
 .iframe-container {
+
   height: calc(100vh - 40px);
   overflow: hidden;
 }
 
 iframe {
+  
   width: 100%;
   height: 100%;
   border: none;

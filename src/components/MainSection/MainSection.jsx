@@ -8,7 +8,7 @@ import Navbar from "../NavBar/NavBar";
 // eslint-disable-next-line react/prop-types
 const MainSection = ({ expanded }) => {
   return (
-    <div className={` ${expanded ? "expanded" : "container-fluid"}`}>
+    <div className={` ${expanded ? "expanded" : "container"}`}>
       <div className="row ">
         <main>
           <Navbar />

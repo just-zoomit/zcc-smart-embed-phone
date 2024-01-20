@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Sidebar from "./components/Sidebar/Sidebar";
 import "./styles/main.css"; // Import global styles
@@ -14,12 +14,12 @@ const App = () => {
 
   return (
     <Router>
-      <div className={`App d-flex `}>
+      <div className={`App d-flex`}>
         <Sidebar />
 
         <MainSection expanded={expanded} />
 
-        <div className={` container-fluid ${expanded ? "expanded" : "collapsed"}`}>
+        <div className={` ${expanded ? "expanded" : "collapsed"}`} style={{ backgroundColor: "#1a1647" }}>
           <VerticalSidebar expanded={expanded} toggleSidebar={toggleSidebar} />
         </div>
       </div>
