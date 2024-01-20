@@ -1,18 +1,3 @@
-// @see  src/components/callLogs
-const recentCalls = [
-  {
-    engagementId: 1,
-    callType: "inbound",
-    queue: "Sales",
-    fromNumber: "123-456-7890",
-    toNumber: "9174994441",
-    timestamp: "2021-01-01 12:00:00",
-    duration: "00:00:30",
-    dispositionCode: "ANSWERED",
-    notes: "This is a note",
-    recordingURL: "https://www.google.com",
-  },
-];
 
 // @see src/components/accountsandContacts
 const sampleContacts = [
@@ -44,6 +29,24 @@ const sampleContacts = [
     phone: "123-456-7890",
   },
 ];
+
+
+// @see  src/components/callLogs
+const recentCalls = [
+  {
+    engagementId: 1,
+    callType: "inbound",
+    queue: "Sales",
+    fromNumber: "123-456-7890",
+    toNumber: "9174994441",
+    timestamp: "2021-01-01 12:00:00",
+    duration: "00:00:30",
+    dispositionCode: "ANSWERED",
+    notes: "This is a note",
+    recordingURL: "https://www.google.com",
+  },
+];
+
 
 // @see src/components/contactDetails
 const sampleContactLogs = [

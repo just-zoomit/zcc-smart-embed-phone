@@ -4,6 +4,7 @@ import { getItem } from "../storageUtil";
 
 // import { recentCalls } from "../../fakeData"; // Import the sample data
 
+// eslint-disable-next-line react/prop-types
 const CallLogs = ({ expanded }) => {
   const [recentCalls, setRecentCalls] = useState([]);
 
@@ -97,37 +98,6 @@ const CallLogs = ({ expanded }) => {
                   <td>{call.objectRecord.dispositionCode}</td>
                   <td>{call.objectRecord.notes}</td>
                   <td> <a onClick={() => getRecordingURL(call.engagementId)} href="#" > {"TEMP URL"} </a> </td>
-                  
-
-                  <td>
-                    {call.objectRecord.callType === "chat" ? (
-                      <p>{call.objectRecord.from}</p>
-                    ) : (
-                      <a onClick={() => onMakeCall(call.to)}> {call.from} </a>
-                    )}
-                  </td>
-                  <td>
-                    {call.objectRecord.callType === "outbound" ? (
-                      <p>{call.to}</p>
-                    ) : (
-                      <a onClick={() => onMakeCall(call.to)}> {call.to} </a>
-                    )}
-                  </td>
-
-                  <td>
-                    {call.recordingURL ? (
-                      <a
-                        onClick={() => getRecordingURL(call.engagementId)}
-                        href="#"
-                      >
-                        {call.objectRecord.callType !== "chat"
-                          ? call.recordingURL
-                          : "download"}
-                      </a>
-                    ) : (
-                      ""
-                    )}
-                  </td>
                 </tr>
               ))}
             </tbody>

@@ -2,9 +2,8 @@ import './NavBar.css'
 
 const Navbar = () => {
 
-  // create makeCall function
+
   const makeCall = () => {
-    // Implement your makeCall method
     console.log("Making call to", numberToCall);
   };
 
@@ -17,7 +16,6 @@ const Navbar = () => {
           <i className="fas fa-bars"></i>
         </button>
 
-        {/* Your search form and other navbar elements */}
         <form className="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
           <div className="input-group">
             <input

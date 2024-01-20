@@ -22,7 +22,6 @@ const SmartEmbed = () => {
         setReceivedMessage("Got this message from child: " + data);
         switch (data.type) {
           case 'zcc-init-config-request':
-            console.log("Hit here -> ", data);
             processZccInitConfigRequest(e);
             break;
           case 'zcc-contact-search-event':
@@ -74,7 +73,7 @@ const SmartEmbed = () => {
         allow=";autoplay;microphone;camera;display-capture;midi;encrypted-media;clipboard-write;"
         id="zoom-embeddable-phone-iframe"
       >
-        
+
       </iframe>
       <p>{receivedMessage}</p>
 

@@ -7,7 +7,7 @@ export function processZccInitConfigRequest(event) {
 
 export function processZccContactSearchEvent(event) {
   // Handle 'zcc-contact-search-event' event here
-  // console.log("2. zcc-contact-search-event received", event);
+  console.log("2. zcc-contact-search-event received", event);
 }
 
 export function processZccIncomingPhoneRequest(event) {
@@ -59,6 +59,5 @@ export function processZccResize(event) {
 export function processZccCallRecording(event) {
   // Handle 'callRecording' event here
   setItem("callRecording", event);
-
   console.log("11. zcc-call-recording received", event);
 }
