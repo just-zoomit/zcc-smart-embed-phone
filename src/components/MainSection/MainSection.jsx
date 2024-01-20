@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AccountsandContacts from "./accountsandContacts";
 import ContactDetails from "./contactDetails";
@@ -6,6 +5,7 @@ import CallLogs from "./callLogs";
 
 import Navbar from "../NavBar/NavBar";
 
+// eslint-disable-next-line react/prop-types
 const MainSection = ({ expanded }) => {
   return (
     <div className={` ${expanded ? "expanded" : "container-fluid"}`}>

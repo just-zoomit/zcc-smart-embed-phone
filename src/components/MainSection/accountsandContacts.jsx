@@ -5,7 +5,7 @@ import { sampleContacts } from "../../fakeData"; // Import the sample data
 import { v4 as uuidv4 } from "uuid"; // Import the uuid library
 import ContactForm from "./ContactForm"; // Import the ContactForm component
 
-import { setItem, getItem } from "../storageUtil";
+import { setItem, getItem, onMakeCall } from "../storageUtil";
 
 const AccountsandContacts = () => {
   const [data, setData] = useState(getItem("userData") || []);
@@ -13,37 +13,6 @@ const AccountsandContacts = () => {
 
   // create an array of contacts
   const contacts = sampleContacts;
-
-  const makeCall = (phone) => {
-    const iframe = window.frames["zoom-embeddable-phone-iframe"];
-
-    if (iframe) {
-      if (iframe.contentWindow) {
-        console.log("iframe.contentWindow is available");
-        iframe.contentWindow.postMessage(
-          {
-            type: "onclicktoact",
-            data: { phone: phone },
-          },
-          "*"
-        );
-
-        console.log("Sending Message data=" + phone);
-      } else {
-        iframe.addEventListener("load", function () {
-          iframe.contentWindow.postMessage(
-            {
-              type: "onclicktoact",
-              data: { phone: phone },
-            },
-            "*"
-          );
-        });
-      }
-    } else {
-      console.error("Iframe is not available");
-    }
-  };
 
   const handleSaveData = (contact) => {
     const newId = uuidv4();
@@ -112,7 +81,7 @@ const AccountsandContacts = () => {
                     <td>{contact.location}</td>
                     <td>{contact.orders}</td>
                     <td>
-                      <a onClick={() => makeCall(contact.phone)} href="#">
+                      <a onClick={() => onMakeCall(contact.phone)} href="#">
                         {contact.phone}
                       </a>
                     </td>

@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { onMakeCall } from "../storageUtil";
+
 import { sampleContacts, sampleContactLogs } from "../../fakeData"; // Import the sample data
 
 
@@ -9,44 +11,10 @@ const ContactDetails = () => {
 
   const contact = sampleContacts.find((c) => c.id.toString() === id) || {};
 
-  // create MakeCall, GetContactLogs, GetRecordingURLs functions
-  const onMakeCall = (phone) => {
-    const iframe = window.frames["zoom-embeddable-phone-iframe"];
-
-    if (iframe) {
-      if (iframe.contentWindow) {
-      
-        console.log("iframe.contentWindow is available");
-        iframe.contentWindow.postMessage(
-          {
-            type: "onclicktoact",
-            data: { phone: phone },
-          },
-          "*"
-        );
-
-        console.log("Sending Message data=" + phone);
-      } else {
-        // If the iframe has not yet loaded, wait for the load event
-        iframe.addEventListener("load", function () {
-          iframe.contentWindow.postMessage(
-            {
-              type: "onclicktoact",
-              data: { phone: phone },
-            },
-            "*"
-          );
-        });
-      }
-    } else {
-      console.error("Iframe is not available");
-    }
-  };
-
   const onGetContactLogs = (contactId) => {
     // Implement your getContactLogs method
     console.log("Getting contact logs for", contactId);
-    
+
     return sampleContactLogs;
   };
 

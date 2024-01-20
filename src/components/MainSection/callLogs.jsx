@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./callLogs.css";
-import { getItem } from "../storageUtil";
+import { getItem, onMakeCall } from "../storageUtil";
 
 // import { recentCalls } from "../../fakeData"; // Import the sample data
 
@@ -8,59 +8,22 @@ import { getItem } from "../storageUtil";
 const CallLogs = ({ expanded }) => {
   const [recentCalls, setRecentCalls] = useState([]);
 
-  const onMakeCall = (phone) => {
-    const iframe = window.frames["zoom-embeddable-phone-iframe"];
-
-    if (iframe) {
-      if (iframe.contentWindow) {
-        // If the iframe has already loaded, send the message
-        console.log("iframe.contentWindow is available");
-        iframe.contentWindow.postMessage(
-          {
-            type: "onclicktoact",
-            data: { phone: phone },
-          },
-          "*"
-        );
-
-        console.log("Sending Message data=" + phone);
-      } else {
-        // If the iframe has not yet loaded, wait for the load event
-        iframe.addEventListener("load", function () {
-          iframe.contentWindow.postMessage(
-            {
-              type: "onclicktoact",
-              data: { phone: phone },
-            },
-            "*"
-          );
-        });
-      }
-    } else {
-      console.error("Iframe is not available");
-    }
-  };
-
   useEffect(() => {
-    // Fetch call logs data from local storage when the component mounts
     const storedCallLogs = getItem("phoneCallLog");
-    if (storedCallLogs) {
-      // Add oject to an array and set it to state
 
-      setRecentCalls([storedCallLogs]); // Make sure to put the merged object in an array
+    if (storedCallLogs) {
+      setRecentCalls([storedCallLogs]);
     }
   }, []);
 
   const clearCallLogs = () => {
-    // Clear call logs in state and local storage
     console.log("Clearing call logs, recentCalls", recentCalls);
   };
 
   const getRecordingURL = (engagementId) => {
-    // Implement your getRecordingURL method
-    const recordingURL = getItem(engagementId);
-    console.log("URL", recordingURL);
-    setRecentCalls(recordingURL);
+    const storedRecordingURL = getItem("callRecording");
+    console.log("URL", storedRecordingURL.recordingUrl);
+    setRecentCalls(storedRecordingURL);
     console.log("Getting recording URL for engagement ID", engagementId);
   };
 
@@ -90,14 +53,41 @@ const CallLogs = ({ expanded }) => {
                 <tr key={call.engagementId}>
                   <td>{call.objectRecord.callType}</td>
                   <td>{call.objectRecord.callQueue}</td>
-                  <td> <a onClick={() => onMakeCall(call.objectRecord.to)} href="#" > {call.objectRecord.to} </a> </td>
-                  <td> <a onClick={() => onMakeCall(call.objectRecord.to)} href="#" > {call.objectRecord.from} </a> </td>
+                  <td>
+                    {" "}
+                    <a
+                      onClick={() => onMakeCall(call.objectRecord.to)}
+                      href="#"
+                    >
+                      {" "}
+                      {call.objectRecord.to}{" "}
+                    </a>{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <a
+                      onClick={() => onMakeCall(call.objectRecord.to)}
+                      href="#"
+                    >
+                      {" "}
+                      {call.objectRecord.from}{" "}
+                    </a>{" "}
+                  </td>
                   <td>{call.objectRecord.wrapUpTimeDuration}</td>
                   <td>{call.objectRecord.wrapUpTimeDuration}</td>
                   <td>{call.engagementId}</td>
                   <td>{call.objectRecord.dispositionCode}</td>
                   <td>{call.objectRecord.notes}</td>
-                  <td> <a onClick={() => getRecordingURL(call.engagementId)} href="#" > {"TEMP URL"} </a> </td>
+                  <td>
+                    {" "}
+                    <a
+                      onClick={() => getRecordingURL(call.engagementId)}
+                      href="#"
+                    >
+                      {" "}
+                      {"TEMP URL"}{" "}
+                    </a>{" "}
+                  </td>
                 </tr>
               ))}
             </tbody>
