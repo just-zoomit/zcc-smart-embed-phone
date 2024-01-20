@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./callLogs.css";
-import { recentCalls } from "../../fakeData"; // Import the sample data
+import { getItem, setItem, removeItem} from "../storageUtil";
 
-const CallLogs = ({ clearCallLogs, expanded }) => {
+// import { recentCalls } from "../../fakeData"; // Import the sample data
+
+const CallLogs = ({  expanded }) => {
+
+  const [recentCalls, setRecentCalls] = useState([]);
+
   const onMakeCall = (phone) => {
     const iframe = window.frames["zoom-embeddable-phone-iframe"];
 
@@ -36,10 +41,37 @@ const CallLogs = ({ clearCallLogs, expanded }) => {
     }
   };
 
+  useEffect(() => {
+    // Fetch call logs data from local storage when the component mounts
+    const storedCallLogs = getItem("phoneCallLog");
+    if (storedCallLogs) {
+      console.log("Stored call logs", storedCallLogs.objectRecord.callType);
+      console.log("Stored call logs", storedCallLogs.engagementId);
+
+      const mergedObject = {
+        engagementId: storedCallLogs.engagementId, // Add engagementId property
+        ...storedCallLogs.objectRecord, // Spread the properties of objectRecord
+      };
+      setRecentCalls([mergedObject]); // Make sure to put the merged object in an array
+      console.log("Stored call logs", recentCalls);
+    }
+  }, []);
+
+
+  const clearCallLogs = () => {
+    // Clear call logs in state and local storage
+    console.log("Clearing call logs, recentCalls", recentCalls);
+  };
+  
+
   const getRecordingURL = (engagementId) => {
     // Implement your getRecordingURL method
+    const recordingURL = getItem(engagementId);
+    console.log("URL", recordingURL);
+    setRecentCalls(recordingURL)
     console.log("Getting recording URL for engagement ID", engagementId);
   };
+
 
   return (
     <div className={` ${expanded ? "col-lg-9" : "container-fluid"}`}>
@@ -62,51 +94,56 @@ const CallLogs = ({ clearCallLogs, expanded }) => {
                 <th>Recording</th>
               </tr>
             </thead>
-            <tbody>
-              {recentCalls.map((call) => (
-                <tr key={call.engagementId}>
-                  <td>{call.callType}</td>
-                  <td>{call.queue}</td>
-                  <td>
-                    {call.callType === "chat" ? (
-                      <p>{call.fromNumber}</p>
-                    ) : (
-                      <a onClick={() => onMakeCall(call.toNumber)} href="#">
-                        {call.fromNumber}
-                      </a>
-                    )}
-                  </td>
-                  <td>
-                    {call.callType === "chat" ? (
-                      <p>{call.toNumber}</p>
-                    ) : (
-                      <a onClick={() => onMakeCall(call.toNumber)} href="#">
-                        {call.toNumber}
-                      </a>
-                    )}
-                  </td>
-                  <td>{call.timestamp}</td>
-                  <td>{call.duration}</td>
-                  <td>{call.engagementId}</td>
-                  <td>{call.dispositionCode}</td>
-                  <td>{call.notes}</td>
-                  <td>
-                    {call.recordingURL ? (
-                      <a
-                        onClick={() => getRecordingURL(call.engagementId)}
-                        href="#"
-                      >
-                        {call.callType !== "chat"
-                          ? call.recordingURL
-                          : "download"}
-                      </a>
-                    ) : (
-                      ""
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            {/* <tbody>
+              
+  {recentCalls.map((call) => (
+    <tr key={call.engagementId}>
+      <td>{call.objectRecord ? call.objectRecord.callType : ""}</td>
+      <td>{call.objectRecord ? call.objectRecord.callQueue : ""}</td>
+      <td>
+        {call.objectRecord && call.objectRecord.callType === "chat" ? (
+          <p>{call.objectRecord.fromNumber}</p>
+        ) : (
+          <a onClick={() => onMakeCall(call.to)} href="#">
+            {call.from}
+          </a>
+        )}
+      </td>
+      <td>
+        {call.objectRecord && call.objectRecord.callType === "chat" ? (
+          <p>{call.to}</p>
+        ) : (
+          <a onClick={() => onMakeCall(call.to)} href="#">
+            {call.to}
+          </a>
+        )}
+      </td>
+    
+      <td>
+        {call.objectRecord ? call.objectRecord.wrapUpTimeDuration : ""}
+      </td>
+      <td>
+        {call.engagementId ? call.engagementId : ""}
+      </td>
+      <td>{call.objectRecord.dispositionCode}</td>
+      <td>{call.objectRecord.notes}</td>
+      <td>
+        {call.recordingURL ? (
+          <a
+            onClick={() => getRecordingURL(call.objectRecord.engagementId)}
+            href="#"
+          >
+            {call.objectRecord.callType !== "chat"
+              ? call.recordingURL
+              : "download"}
+          </a>
+        ) : (
+          ""
+        )}
+      </td>
+    </tr>
+  ))}
+</tbody> */}
           </table>
         </div>
       </div>
