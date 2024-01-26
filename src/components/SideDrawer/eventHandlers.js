@@ -1,4 +1,5 @@
-import { setItem } from "../storageUtil";
+import { setItem, getItem } from "../storageUtil";
+import { v4 as uuidv4 } from "uuid"; 
 
 export function processZccInitConfigRequest(event) {
   // Handle 'zcc-init-config-request' event here
@@ -44,12 +45,25 @@ export function processZccZallConnectedEvent(event) {
   console.log("8. zcc-call-connected received", event);
 }
 
-export function processZccPhoneCallLog(event) {
+export function processZccPhoneCallLog(data) {
   // Handle 'zcc-phone-call-log' event here
+  const phoneCallLog = getItem("phoneCallLog") || []; // Get the existing array from local storage
+  
+  // Check if the event already exists in the array
+  const eventExists = phoneCallLog.some((entry) => entry.engagementId === data.engagementId);
 
-  setItem("phoneCallLog", event);
-  console.log("9. zcc-phone-call-log received", event);
+  if (!eventExists) {
+    phoneCallLog.push(data); // Add the incoming data object to the array
+    setItem("phoneCallLog", phoneCallLog); // Save the updated array to local storage
+    console.log("9. zcc-phone-call-log received", data);
+  } else {
+    console.log("Event already exists in phoneCallLog", data.engagementId);
+  }
 }
+
+
+
+
 
 export function processZccResize(event) {
   // Handle 'zcc-resize' event here

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 
 import { processZccInitConfigRequest, processZccContactSearchEvent, processZccIncomingPhoneRequest,
       processZccIncomingEmailRequest, processZccCallRinging, processZccChatRinging, processZccScreenPop,
@@ -6,8 +6,7 @@ import { processZccInitConfigRequest, processZccContactSearchEvent, processZccIn
       } from './eventHandlers';
 
 const SmartEmbed = () => {
-  // State variables
-  const [receivedMessage, setReceivedMessage] = useState("");
+  
   
   useEffect(() => {
     window.addEventListener("message", function (e) {
@@ -19,7 +18,7 @@ const SmartEmbed = () => {
         console.log("PostMessage received event (TYPE) ", data.type);
         console.log("PostMessage content ", JSON.stringify(data));
 
-        setReceivedMessage("Got this message from child: " + data);
+  
         switch (data.type) {
           case 'zcc-init-config-request':
             processZccInitConfigRequest(e);
@@ -46,6 +45,7 @@ const SmartEmbed = () => {
               processZccZallConnectedEvent(data.data);
               break;
           case 'zcc-phone-call-log':
+          
               processZccPhoneCallLog(data.data);
               break;
           case 'zcc-resize':
@@ -75,7 +75,7 @@ const SmartEmbed = () => {
       >
 
       </iframe>
-      <p>{receivedMessage}</p>
+
 
 
     </div>

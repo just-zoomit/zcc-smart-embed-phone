@@ -2,20 +2,20 @@
 
   padding-right: 10px;
   top: 0;
-  right: -400px; /* Initial position, hides the sidebar */
+  right: -400px; 
   height: 100vh;
-  width: auto; /* Set the width when collapsed */
+  width: auto; 
   background-color: #f8f9fa;
-  transition: right 0.3s ease-out, width 0.3s ease-out; /* Add transition for width */
+  transition: right 0.3s ease-out, width 0.3s ease-out; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #1a1647;
-  box-sizing: border-box; /* Ensure consistent box sizing */
+  box-sizing: border-box; 
 }
 
 .vertical-sidebar.expanded {
   background-color: #1a1647;
-  right: 0; /* Shows the sidebar when expanded */
-  width: 36.60%; /* Set the width when expanded */
+  right: 0; 
+  width: 36.60%; 
 }
 
 .toggle-button {
@@ -24,7 +24,7 @@
   padding-left: 10px;
   height: 70px;
   width: auto;
-  box-sizing: border-box; /* Ensure consistent box sizing */
+  box-sizing: border-box; 
   color: #fff;
   text-align: left;
 }

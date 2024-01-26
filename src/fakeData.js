@@ -1,4 +1,3 @@
-
 // @see src/components/accountsandContacts
 const sampleContacts = [
   {
@@ -30,7 +29,6 @@ const sampleContacts = [
   },
 ];
 
-
 // @see  src/components/callLogs
 const recentCalls = [
   {
@@ -46,7 +44,6 @@ const recentCalls = [
     recordingURL: "https://www.google.com",
   },
 ];
-
 
 // @see src/components/contactDetails
 const sampleContactLogs = [

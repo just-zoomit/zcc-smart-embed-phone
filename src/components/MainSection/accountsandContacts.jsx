@@ -8,12 +8,10 @@ import "./accountsandContacts.css";
 import { sampleContacts } from "../../fakeData"; // Import the sample data
 
 
-
 const AccountsandContacts = () => {
   const [data, setData] = useState(getItem("userData") || []);
   const [showForm, setShowForm] = useState(false);
 
-  // create an array of contacts
   const contacts = sampleContacts;
 
   const handleSaveData = (contact) => {

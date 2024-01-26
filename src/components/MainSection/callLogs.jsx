@@ -11,13 +11,34 @@ const CallLogs = ({ expanded }) => {
   useEffect(() => {
     const storedCallLogs = getItem("phoneCallLog");
 
-    if (storedCallLogs) {
-      setRecentCalls([storedCallLogs]);
+    console.log("storedCallLogs", storedCallLogs);
+
+    try {
+      // Create a set to store unique engagementId values
+      const uniqueEngagementIds = new Set();
+      
+      // Filter out duplicate events based on engagementId
+      const uniqueCallLogs = storedCallLogs.filter((callLog) => {
+        if (!uniqueEngagementIds.has(callLog.engagementId)) {
+
+          uniqueEngagementIds.add(callLog.engagementId);
+          return true; // Include this event in the uniqueCallLogs
+          
+        }
+        return false; // Skip this event as it's a duplicate
+      });
+
+      setRecentCalls(uniqueCallLogs);
+    } catch (error) {
+      console.log("Error sorting call logs", error);
     }
   }, []);
 
   const clearCallLogs = () => {
-    console.log("Clearing call logs, recentCalls", recentCalls);
+    
+    window.localStorage.removeItem("phoneCallLog");
+    // Clear the data from the state
+    setRecentCalls([]); 
   };
 
   const getRecordingURL = (engagementId) => {
@@ -28,7 +49,7 @@ const CallLogs = ({ expanded }) => {
   };
 
   return (
-    <div className={` ${expanded ? "col-lg-9" : "container-fluid"}`}>
+    <div className={` ${expanded ? "col-lg-11" : "container-fluid"}`} style={{ paddingLeft: '20px' }}>
       <h3 className="text-dark mb-4">Call Logs</h3>
       <button onClick={clearCallLogs}>Clear</button>
       <div className="card-body">
