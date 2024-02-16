@@ -28,6 +28,7 @@ const ContactDetails = () => {
   useEffect(() => {
     // You can use the 'contactDetails' here to populate your component
     console.log("Details HERE:", contact);
+    console.log("Contact ID:", id);
   }, [contact]);
 
   return (
