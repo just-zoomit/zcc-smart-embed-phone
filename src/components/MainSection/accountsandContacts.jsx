@@ -1,19 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid"; 
+import { v4 as uuidv4 } from "uuid";
 import ContactForm from "./ContactForm";
 import { setItem, getItem, onMakeCall } from "../storageUtil";
 import "./accountsandContacts.css";
-
-import { sampleContacts } from "../../fakeData"; // Import the sample data
-
 
 const AccountsandContacts = () => {
   const [data, setData] = useState(getItem("userData") || []);
 
   const [showForm, setShowForm] = useState(false);
   console.log("Contact Data:", data);
-  const contacts = sampleContacts;
 
   const handleSaveData = (contact) => {
     const newId = uuidv4();

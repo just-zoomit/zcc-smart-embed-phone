@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 // eslint-disable-next-line react/prop-types
 const ContactForm = ({ onSaveContact }) => {
   const [newContact, setNewContact] = useState({
-    name: '',
-    email: '',
-    account: '',
-    location: '',
-    orders: '',
-    phone: '',
+    name: "",
+    email: "",
+    account: "",
+    location: "",
+    orders: "",
+    phone: "",
   });
 
   const handleSubmit = () => {
@@ -20,12 +20,12 @@ const ContactForm = ({ onSaveContact }) => {
     onSaveContact(updatedContact);
 
     setNewContact({
-      name: '',
-      email: '',
-      account: '',
-      location: '',
-      orders: '',
-      phone: '',
+      name: "",
+      email: "",
+      account: "",
+      location: "",
+      orders: "",
+      phone: "",
     });
   };
 
@@ -36,7 +36,6 @@ const ContactForm = ({ onSaveContact }) => {
       ...newContact,
       [name]: value,
     });
-    
   };
 
   return (

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getItem, onMakeCall } from "../storageUtil";
 
-import { sampleContacts, sampleContactLogs } from "../../fakeData"; // Import the sample data
+import { sampleContactLogs } from "../../fakeData"; // Import the sample data
 
 const ContactDetails = () => {
   const [data, setData] = useState(getItem("userData") || []);
@@ -24,12 +24,6 @@ const ContactDetails = () => {
     // Implement your getRecordingURLs method
     console.log("Getting recording URLs for", engagementId);
   };
-
-  useEffect(() => {
-    // You can use the 'contactDetails' here to populate your component
-    console.log("Details HERE:", contact);
-    console.log("Contact ID:", id);
-  }, [contact]);
 
   return (
     <div className="container-fluid">

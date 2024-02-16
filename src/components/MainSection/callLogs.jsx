@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import "./callLogs.css";
 import { getItem, onMakeCall } from "../storageUtil";
 
-// import { recentCalls } from "../../fakeData"; // Import the sample data
-
 // eslint-disable-next-line react/prop-types
 const CallLogs = ({ expanded }) => {
   const [recentCalls, setRecentCalls] = useState([]);
@@ -13,29 +11,25 @@ const CallLogs = ({ expanded }) => {
 
     try {
       const uniqueEngagementIds = new Set();
-      
+
       // Filter out duplicate events based on engagementId
       const uniqueCallLogs = storedCallLogs.filter((callLog) => {
         if (!uniqueEngagementIds.has(callLog.engagementId)) {
-
           uniqueEngagementIds.add(callLog.engagementId);
-          return true; 
-
+          return true;
         }
-        return false; 
+        return false;
       });
 
       setRecentCalls(uniqueCallLogs);
-
     } catch (error) {
       console.log("Error sorting call logs", error);
     }
   }, []);
 
   const clearCallLogs = () => {
-    
     window.localStorage.removeItem("phoneCallLog");
-    setRecentCalls([]); 
+    setRecentCalls([]);
   };
 
   const getRecordingURL = (engagementId) => {
@@ -46,7 +40,10 @@ const CallLogs = ({ expanded }) => {
   };
 
   return (
-    <div className={` ${expanded ? "col-lg-11" : "container-fluid"}`} style={{ paddingLeft: '20px' }}>
+    <div
+      className={` ${expanded ? "col-lg-11" : "container-fluid"}`}
+      style={{ paddingLeft: "20px" }}
+    >
       <h3 className="text-dark mb-4">Call Logs</h3>
       <button onClick={clearCallLogs}>Clear</button>
       <div className="card-body">
@@ -91,7 +88,7 @@ const CallLogs = ({ expanded }) => {
                       {call.objectRecord.from}{" "}
                     </a>{" "}
                   </td>
-                  <td>{call.objectRecord.callStartTime.replace('T', '/\n')}</td>
+                  <td>{call.objectRecord.callStartTime.replace("T", "/\n")}</td>
                   <td>{call.objectRecord.wrapUpTimeDuration}</td>
                   <td>{call.engagementId}</td>
                   <td>{call.objectRecord.dispositionCode}</td>
