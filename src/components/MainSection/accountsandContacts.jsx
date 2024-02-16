@@ -10,8 +10,9 @@ import { sampleContacts } from "../../fakeData"; // Import the sample data
 
 const AccountsandContacts = () => {
   const [data, setData] = useState(getItem("userData") || []);
-  const [showForm, setShowForm] = useState(false);
 
+  const [showForm, setShowForm] = useState(false);
+  console.log("Contact Data:", data);
   const contacts = sampleContacts;
 
   const handleSaveData = (contact) => {
@@ -58,17 +59,17 @@ const AccountsandContacts = () => {
                 </tr>
               </thead>
               <tbody>
-                {contacts.map((contact) => (
+                {data.map((contact) => (
                   <tr key={contact.id}>
                     <td style={{ fontFamily: "Lato, sans-serif" }}>
                       <img
                         className="rounded-circle me-2"
                         width="30"
                         height="30"
-                        src={contact.name ? `src/assets/img/${contact.name}.png` : "src/assets/img/pic.png"}
+                        src={`src/assets/img/${contact.name}.png`}
                         alt=""
                         onError={(e) => {
-                          e.target.src = "src/assets/img/pic.png";
+                          e.target.src = `src/assets/img/default-icon.png`;
                         }}
                       />
 

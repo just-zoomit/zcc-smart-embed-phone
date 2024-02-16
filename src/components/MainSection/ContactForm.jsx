@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-
+// eslint-disable-next-line react/prop-types
 const ContactForm = ({ onSaveContact }) => {
   const [newContact, setNewContact] = useState({
     name: '',
@@ -15,6 +15,7 @@ const ContactForm = ({ onSaveContact }) => {
   const handleSubmit = () => {
     const newId = uuidv4();
     const updatedContact = { id: newId, ...newContact };
+    console.log("Logged", updatedContact);
 
     onSaveContact(updatedContact);
 
@@ -30,10 +31,12 @@ const ContactForm = ({ onSaveContact }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
     setNewContact({
       ...newContact,
       [name]: value,
     });
+    
   };
 
   return (

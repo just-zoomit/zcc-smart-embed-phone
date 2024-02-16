@@ -11,10 +11,7 @@ const CallLogs = ({ expanded }) => {
   useEffect(() => {
     const storedCallLogs = getItem("phoneCallLog");
 
-    console.log("storedCallLogs", storedCallLogs);
-
     try {
-      // Create a set to store unique engagementId values
       const uniqueEngagementIds = new Set();
       
       // Filter out duplicate events based on engagementId
@@ -22,13 +19,14 @@ const CallLogs = ({ expanded }) => {
         if (!uniqueEngagementIds.has(callLog.engagementId)) {
 
           uniqueEngagementIds.add(callLog.engagementId);
-          return true; // Include this event in the uniqueCallLogs
-          
+          return true; 
+
         }
-        return false; // Skip this event as it's a duplicate
+        return false; 
       });
 
       setRecentCalls(uniqueCallLogs);
+
     } catch (error) {
       console.log("Error sorting call logs", error);
     }
@@ -37,7 +35,6 @@ const CallLogs = ({ expanded }) => {
   const clearCallLogs = () => {
     
     window.localStorage.removeItem("phoneCallLog");
-    // Clear the data from the state
     setRecentCalls([]); 
   };
 
@@ -94,7 +91,7 @@ const CallLogs = ({ expanded }) => {
                       {call.objectRecord.from}{" "}
                     </a>{" "}
                   </td>
-                  <td>{call.objectRecord.wrapUpTimeDuration}</td>
+                  <td>{call.objectRecord.callStartTime.replace('T', '/\n')}</td>
                   <td>{call.objectRecord.wrapUpTimeDuration}</td>
                   <td>{call.engagementId}</td>
                   <td>{call.objectRecord.dispositionCode}</td>

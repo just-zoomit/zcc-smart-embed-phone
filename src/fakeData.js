@@ -2,7 +2,7 @@
 const sampleContacts = [
   {
     id: 1,
-    name: "Maurice Lawson",
+    name: "Mauricee Lawson",
     email: "donte.zoomie@gmail.com",
     account: "67890",
     location: "Town",

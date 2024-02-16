@@ -14,15 +14,12 @@ const App = () => {
 
   return (
     <Router>
-      <div className={`App d-flex`}>
+      <div className={`App d-lg-flex`}>
         <Sidebar />
-
         <MainSection expanded={expanded} />
-
         <div
-          className={` ${expanded ? "expanded" : "collapsed"}`}
-          style={{ backgroundColor: "#1a1647" }}
-        >
+          className={` ${expanded ? "expanded container-fluid" : "collapsed"}`}
+          style={{ backgroundColor: "#1a1647" }}>
           <VerticalSidebar expanded={expanded} toggleSidebar={toggleSidebar} />
         </div>
       </div>

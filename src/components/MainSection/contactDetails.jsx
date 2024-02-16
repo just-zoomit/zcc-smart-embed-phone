@@ -1,15 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { onMakeCall } from "../storageUtil";
+import { getItem, onMakeCall } from "../storageUtil";
 
 import { sampleContacts, sampleContactLogs } from "../../fakeData"; // Import the sample data
 
-
 const ContactDetails = () => {
+  const [data, setData] = useState(getItem("userData") || []);
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const contact = sampleContacts.find((c) => c.id.toString() === id) || {};
+  console.log("ID:", data);
+
+  const contact = data.find((c) => c.id.toString() === id) || {};
 
   const onGetContactLogs = (contactId) => {
     // Implement your getContactLogs method
@@ -51,8 +53,11 @@ const ContactDetails = () => {
                   className="rounded-circle me-2"
                   width="100"
                   height="100"
-                  src={`/src/assets/img/${contact.name}.png`}
+                  src={`src/assets/img/${contact.name}.png`}
                   alt=""
+                  onError={(e) => {
+                    e.target.src = `/src/assets/img/default-icon.png`;
+                  }}
                 />
               </td>
               <td>
