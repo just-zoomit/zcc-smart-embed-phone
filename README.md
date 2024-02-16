@@ -28,30 +28,6 @@ cd zcc-react-demo
 # run NPM to install the app dependencies
 npm install
 
-# initialize your ngrok session
-ngrok http 3001
-```
-
-
-
-### Config `.env`
-
-When building for Development, open the `server/.env` file in your text editor and enter the following information from the App Credentials section you just
-configured:
-
-```ini
-# Client ID for your Zoom App
-ZM_CLIENT_ID=[app_client_id]
-
-# Client Secret for your Zoom app
-ZM_CLIENT_SECRET=[app_client_secret]
-
-ZCC_ENTRY_ID= [app_entry_ID ]
-
-# Ngrok endpoint for your app in the Zoom Marketplace
-PUBLIC_URL=https://[xxxx-xx-xx-xxx-x].ngrok-free.app
-
-
 ```
 
 #### Zoom for Government
